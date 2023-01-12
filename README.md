@@ -29,3 +29,5 @@
 Не забудьте написать unit-тесты, которые обеспечивают 100% покрытие функций и классов, которые вы тестируете.
 
 ---
+
+[![Build status](https://ci.appveyor.com/api/projects/status/4f2ipupdk7tuwb1t?svg=true)](https://ci.appveyor.com/project/Turovae/arraybuffer-math)
