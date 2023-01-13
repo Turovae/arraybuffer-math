@@ -1,6 +1,6 @@
-import Character from './character';
+import extendCharacter from './extendCharacter';
 
-export default class Daemon extends Character {
+export default class Daemon extends extendCharacter {
   constructor(name, type = 'Daemon') {
     super(name, type);
     this.attack = 10;

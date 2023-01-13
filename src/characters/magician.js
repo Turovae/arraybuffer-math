@@ -1,6 +1,6 @@
-import Character from './character';
+import extendCharacter from './extendCharacter';
 
-export default class Magician extends Character {
+export default class Magician extends extendCharacter {
   constructor(name, type = 'Magician') {
     super(name, type);
     this.attack = 10;

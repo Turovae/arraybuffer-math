@@ -8,5 +8,6 @@ test('test correct magician', () => {
     level: 1,
     attack: 10,
     defence: 40,
+    _stoned: false,
   });
 });
