@@ -1,34 +1,39 @@
 export default class Character {
   constructor(name, type) {
-    if (name.length < 2 || name.length > 10) {
-      throw new Error('Длина имени должна быть от 2 до 10 символов');
-    }
-    const characterTypes = ['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
-    if (!characterTypes.includes(type)) {
-      throw new Error('Некорректный тип персонажа');
-    }
     this.name = name;
     this.type = type;
-    this.health = 100;
-    this.level = 1;
-    this.attack = undefined;
-    this.defence = undefined;
+    this.attackValue = undefined;
+    this.distance = undefined;
+    this.isStoned = false;
   }
 
-  levelUp() {
-    if (this.health === 0) {
-      throw new Error('Нельзя повысить уровень умершего');
+  get attack() {
+    if (!this.attackValue) {
+      throw new Error('Атака не определена');
     }
-    this.level += 1;
-    this.attack = Math.round(this.attack * 1.2);
-    this.defence = Math.round(this.defence * 1.2);
-    this.health = 100;
+    if (!this.distance) {
+      throw new Error('Дистанция не определена');
+    }
+    const distAttack = this.attackValue * (1 - (this.distance - 1) / 10);
+    if (distAttack <= 0) {
+      return 0;
+    }
+    if (this.isStoned) {
+      const total = Math.round(distAttack - Math.log2(this.distance) * 5);
+      return total > 0 ? total : 0;
+    }
+    return Math.round(distAttack);
   }
 
-  damage(points) {
-    if (this.health > 0) {
-      const resultHealth = Math.round(this.health - points * (1 - this.defence / 100));
-      this.health = resultHealth > 0 ? resultHealth : 0;
-    }
+  set attack(value) {
+    this.attackValue = value;
+  }
+
+  get stoned() {
+    return this.isStoned;
+  }
+
+  set stoned(state) {
+    this.isStoned = state;
   }
 }
